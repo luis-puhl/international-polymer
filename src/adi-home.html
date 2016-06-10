@@ -1,4 +1,5 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="adi-team-tile.html">
 
 <dom-module id="adi-home">
 <template>
@@ -49,18 +50,19 @@
 		mollit anim id est laborum.
 	</p>
 
-	Team Tiles goes here.
-	<ul class="grid">
-		<template is="dom-repeat" items="[[teams]]" initial-count="16">
-			<li>
-				<img id="tile" class="adi-team-tile"
-					alt="team tile"
-					placeholderImg="http://placehold.it/75x75"
-					src="http://placehold.it/75x75">
-				</img>
-			</li>
+	Team Tiles goes here:
+	<br />
+	<span>
+		<template is="dom-repeat" items="{{teams}}" as="team">
+			<adi-team-tile id="tile" class="adi-team-tile"
+				alt="team tile"
+				placeholderImg="http://placehold.it/75x75"
+				src="http://placehold.it/75x75"
+				team="{{team}}"
+				>
+			</adi-team-tile>
 		</template>
-	</ul>
+	</span>
 </template>
 
 <script>
@@ -68,7 +70,22 @@
 		is: 'adi-home',
 		properties: {
 			name: String,
-			teams: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}],
+			teams: {
+				type: Array,
+				value: function() {
+					var teams = [];
+					for (var i = 1; i <= 16; i++) {
+						teams.push({id: i});
+					}
+					return teams;
+				}
+			}
+		},
+		isOddId: function(item) {
+			return item.id % 2;
+		},
+		isEvenId: function(item) {
+			return !(item.id % 2);
 		},
 		_onBannerLoad: function() {
 			this.$.banner.style.transition = '0.5s opacity';
