@@ -1,0 +1,81 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="adi-home">
+<template>
+	<style>
+		:host{
+			padding: 0 11em;
+		}
+		p {
+			text-align: justify;
+		}
+		#adi-banner {
+			display: block;
+			position: relative;
+			overflow: hidden;
+			background-size: cover;
+			background-position: center;
+			text-align: center;
+		}
+		img.adi-banner {
+			margin-left: auto;
+			margin-right: auto;
+			margin-bottom: -12em;
+			margin-top: -8em;
+			max-width: 100%;
+			max-height: 100%;
+			opacity: 1;
+			transition: 0.5s opacity;
+		}
+	</style>
+	<div id="adi-banner">
+		<!-- TODO change for iron-image -->
+		<img id="banner" class="adi-banner"
+			alt="home-banner" placeholderImg="http://placehold.it/350x150"
+			src="http://www.gamereckt.com/wp-content/uploads/2015/09/dota-2-the-international-2016.jpg">
+		</img>
+	</div>
+
+	<p>
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+		veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+		commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+		velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+		occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+		mollit anim id est laborum.
+	</p>
+
+	Team Tiles goes here.
+	<ul class="grid">
+		<template is="dom-repeat" items="[[teams]]" initial-count="16">
+			<li>
+				<img id="tile" class="adi-team-tile"
+					alt="team tile"
+					placeholderImg="http://placehold.it/75x75"
+					src="http://placehold.it/75x75">
+				</img>
+			</li>
+		</template>
+	</ul>
+</template>
+
+<script>
+	Polymer({
+		is: 'adi-home',
+		properties: {
+			name: String,
+			teams: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}],
+		},
+		_onBannerLoad: function() {
+			this.$.banner.style.transition = '0.5s opacity';
+			this.$.banner.style.opacity = 1;
+		},
+		_onBannerError: function() {
+			if (!this.placeholderImg) {
+				this.$.banner.src = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#CCC" d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>');
+			}
+		},
+	});
+</script>
+</dom-module>

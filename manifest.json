@@ -1,0 +1,7 @@
+{
+  "name": "about-dota-international-polymer",
+  "short_name": "about-dota-international-polymer",
+  "description": "News and detaild info for dota international lovers",
+  "start_url": "/",
+  "display": "standalone"
+}

@@ -1,0 +1,11 @@
+/*
+| /css/master.css
+*/
+
+span#loading-flag {
+	position: absolute;
+    top: calc(50% - 1em);
+    width: 100%;
+    display: block;
+    text-align: center;
+}
