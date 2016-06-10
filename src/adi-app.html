@@ -1,0 +1,43 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="adi-home.html">
+
+<dom-module id="adi-app">
+<template>
+	<style>
+	:host {
+		display: block;
+	}
+	footer.footer {
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		/* Set the fixed height of the footer here */
+		height: 2.5em;
+		background-color: cyan;
+	}
+	</style>
+
+	<adi-home>adi-home page goes here</adi-home>
+
+	<h2>Hello [[appName]]</h2>
+
+	<footer class="footer">
+		<div class="container">
+			<p class="text-muted">This is a app level footer.</p>
+		</div>
+		<!-- TODO checkout http://materializecss.com/footer.html and other CSS pratices -->
+	</footer>
+</template>
+
+<script>
+	Polymer({
+	is: 'adi-app',
+	properties: {
+		appName: {
+			type: String,
+			value: 'international-polymer-app',
+		},
+	},
+	});
+</script>
+</dom-module>

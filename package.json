@@ -1,0 +1,27 @@
+{
+  "name": "international-polymer",
+  "version": "0.0.1",
+  "description": "About Dota Interantional",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "lite-server": "^2.2.0"
+  },
+  "scripts": {
+	"lite-server": "lite-server start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luis-puhl/international-polymer.git"
+  },
+  "author": "luis-puhl; vinicius-sato; vinicius-figueiredo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/luis-puhl/international-polymer/issues"
+  },
+  "homepage": "https://github.com/luis-puhl/international-polymer#readme"
+}
