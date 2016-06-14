@@ -5,7 +5,6 @@
 <template>
 	<style>
 		:host{
-			width: 1008px;
 			display: block;
 			text-align: center;
 			margin: auto;
@@ -24,12 +23,16 @@
 		img.adi-banner {
 			margin-left: auto;
 			margin-right: auto;
-			margin-bottom: -12em;
-			margin-top: -8em;
-			max-width: 100%;
-			max-height: 100%;
 			opacity: 1;
 			transition: 0.5s opacity;
+		}
+		.flex-grid{
+			display: inline-flex;
+			align-items: center;
+			flex-wrap: wrap;
+			ransition-duration: 0.2s;
+			transition-property: opacity;
+			transition-timing-function: ease-in;
 		}
 	</style>
 	<div id="adi-banner">
@@ -52,17 +55,16 @@
 
 	Team Tiles goes here:
 	<br />
-	<span>
-		<template is="dom-repeat" items="{{teams}}" as="team">
-			<adi-team-tile id="tile" class="adi-team-tile"
-				alt="team tile"
-				placeholderImg="http://placehold.it/75x75"
-				src="http://placehold.it/75x75"
-				team="{{team}}"
-				>
-			</adi-team-tile>
-		</template>
-	</span>
+	<template class="flex-grid" is="dom-repeat" items="{{teams}}" as="team">
+		<adi-team-tile id="tile" class="adi-team-tile"
+			alt="team tile"
+			placeholderImg="http://placehold.it/75x75"
+			src="http://placehold.it/75x75"
+			team="{{team}}"
+			>
+		</adi-team-tile>
+	</template>
+
 </template>
 
 <script>

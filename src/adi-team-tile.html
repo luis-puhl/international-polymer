@@ -5,7 +5,7 @@
 <template>
 	<style>
 	:host {
-		
+
 	}
 	img {
 		max-width: 100%;
@@ -45,9 +45,6 @@
 		_onImgLoad: function() {
 			this.$.img.style.transition = '0.5s opacity';
 			this.$.img.style.opacity = 1;
-			this.$.img.style.marginTop = marginTop;
-			this.$.img.style.marginBottom = marginBottom;
-			this.$.img.style.overflow = overflow;
 		},
 		_onImgError: function() {
 			if (!this.placeholderImg) {

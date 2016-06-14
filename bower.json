@@ -5,7 +5,11 @@
   "main": "index.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.4.0",
-    "bootstrap": "^3.3.6"
+    "bootstrap": "^3.3.6",
+    "iron-elements": "PolymerElements/iron-elements#^1.0.10",
+    "paper-elements": "PolymerElements/paper-elements#^1.0.7",
+    "paper-input": "PolymerElements/paper-input#^1.1.11",
+    "paper-header-panel": "PolymerElements/paper-header-panel#1.1.6"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

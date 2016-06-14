@@ -1,22 +1,63 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../bower_components/paper-header-panel/paper-header-panel.html">
+<link rel="import" href="../bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-icons/communication-icons.html">
+<link rel="import" href="../bower_components/iron-icons/social-icons.html">
+<link rel="import" href="../bower_components/iron-icons/image-icons.html">
+
 <link rel="import" href="adi-home.html">
 
 <dom-module id="adi-app">
 <template>
 	<style>
-	:host {
-		display: block;
-	}
-	footer.footer {
-		bottom: 0;
-		width: 100%;
-		/* Set the fixed height of the footer here */
-		height: 2.5em;
-		background-color: cyan;
-	}
+		paper-header-panel {
+			@apply(--shadow-elevation-2dp);
+		}
+		.green .paper-header {
+			background-color: var(--paper-green-500);
+		}
+		paper-toolbar.green {
+			background-color: var(--paper-green-500);
+		}
 	</style>
 
-	<adi-home>adi-home page goes here</adi-home>
+	<paper-header-panel mode="waterfall" class="green flex">
+		<paper-toolbar class="green">
+			<paper-icon-button icon="icons:account-balance" on-tap="menuAction">
+				about dota international
+			</paper-icon-button>
+			<span class="title">All about Dota International</span>
+
+			<paper-icon-button icon="social:people" on-tap="menuAction">
+				Teams
+			</paper-icon-button>
+			<paper-icon-button icon="social:person" on-tap="menuAction">
+				Players
+			</paper-icon-button>
+			<paper-icon-button icon="image:portrait" on-tap="menuAction">
+				Heros
+			</paper-icon-button>
+
+			<paper-input label="Search...">
+				Search box
+				<paper-icon-button suffix icon="icons:search" alt="do search" title="do search">
+				</paper-icon-button>
+			</paper-input>
+		</paper-toolbar>
+
+		<div class="content">
+		</div>
+
+	</paper-header-panel>
+
+	<adi-home id="mainPanel">adi-home page goes here</adi-home>
 
 	<footer class="footer">
 		<div class="container">
