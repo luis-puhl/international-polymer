@@ -26,43 +26,69 @@
 		paper-toolbar.green {
 			background-color: var(--paper-green-500);
 		}
+		nav.navbar{
+			margin: 0;
+		}
+		.footer{
+			position: relative;
+			padding-top: 40px;
+			padding-bottom: 40px;
+			margin-top: 40px;
+			font-size: 12px;
+			line-height: 1.5;
+			color: #767676;
+			border-top: 1px solid #eee;
+		}
 	</style>
 
-	<paper-header-panel mode="waterfall" class="green flex">
-		<paper-toolbar class="green">
-			<paper-icon-button icon="icons:account-balance" on-tap="menuAction">
-				about dota international
-			</paper-icon-button>
-			<span class="title">All about Dota International</span>
+	<nav role="navigation" class="navbar navbar-default navbar-static-top">
+		<div class="container-fluid">
 
-			<paper-icon-button icon="social:people" on-tap="menuAction">
-				Teams
-			</paper-icon-button>
-			<paper-icon-button icon="social:person" on-tap="menuAction">
-				Players
-			</paper-icon-button>
-			<paper-icon-button icon="image:portrait" on-tap="menuAction">
-				Heros
-			</paper-icon-button>
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#bs-navbar-collapse"
+				aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Brand</a>
+			</div>
 
-			<paper-input label="Search...">
-				Search box
-				<paper-icon-button suffix icon="icons:search" alt="do search" title="do search">
-				</paper-icon-button>
-			</paper-input>
-		</paper-toolbar>
-
-		<div class="content">
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="/teams">TEAMS</a>
+					</li>
+					<li>
+						<a href="/players">PLAYERS</a>
+					</li>
+					<li>
+						<a href="/heroes">HEROES</a>
+					</li>
+				</ul>
+				<form class="navbar-form navbar-right" role="search">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Search">
+					</div>
+					<button type="submit" class="btn btn-default">Submit</button>
+				</form>
+			</div>
 		</div>
+	</nav>
 
-	</paper-header-panel>
+	<div class="container">
 
-	<adi-home id="mainPanel">adi-home page goes here</adi-home>
+		<adi-home id="mainPanel">adi-home page goes here</adi-home>
 
-	<footer class="footer">
-		<div class="container">
-			<p class="text-muted">This is a app level footer.</p>
-		</div>
+	</div>
+
+	<footer role="navigation" class="footer">
+		<p>&copy; 2015 Company, Inc.</p>
+		<p class="text-muted">This is a app level footer.</p>
 		<!-- TODO checkout http://materializecss.com/footer.html and other CSS pratices -->
 	</footer>
 </template>
