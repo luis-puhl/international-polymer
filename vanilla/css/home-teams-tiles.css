@@ -22,6 +22,7 @@
 	max-width: 250px;
 }
 .team-tile span {
+	margin-top: 1rem;
 	display: block;
 }
 
@@ -32,14 +33,24 @@
 */
 
 
-@media (min-width: 320px) and (max-width: 425px) {
+@media (max-width: 300px) {
 	.team-tile{
 		max-width: calc(100% / 2);
 	}
 }
-@media (min-width: 425px) and (max-width: 992px) {
+@media (min-width: 300px) and (max-width: 425px) {
 	.team-tile{
 		max-width: calc(100% / 4);
+	}
+}
+@media (min-width: 425px) and (max-width: 650px) {
+	.team-tile{
+		max-width: calc(100% / 4);
+	}
+}
+@media (min-width: 650px) and (max-width: 992px) {
+	.team-tile{
+		max-width: calc(100% / 8);
 	}
 }
 @media (min-width: 992px) {
