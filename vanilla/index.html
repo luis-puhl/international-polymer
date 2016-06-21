@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>about-dota-international-polymer</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="manifest" href="/manifest.json">
+
+	<link rel="stylesheet" href="main.css" media="screen" title="no title" charset="utf-8">
+	<link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" media="screen" title="no title" charset="utf-8">
+
+	<script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+	<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+</head>
+<body class="fullbleed layout vertical">
+
+	<nav role="navigation" class="navbar navbar-default navbar-static-top">
+		<div class="container-fluid">
+
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#bs-navbar-collapse"
+				aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Brand</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="/teams">TEAMS</a>
+					</li>
+					<li>
+						<a href="/players">PLAYERS</a>
+					</li>
+					<li>
+						<a href="/heroes">HEROES</a>
+					</li>
+				</ul>
+				<form class="navbar-form navbar-right" role="search">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Search">
+					</div>
+					<button type="submit" class="btn btn-default">Submit</button>
+				</form>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="container-fluid">
+			<div id="adi-banner row">
+				<!-- TODO change for iron-image -->
+				<img id="banner" class="adi-banner col-md-12"
+					alt="home-banner"
+					src="http://placehold.it/350x150"
+					src2="http://www.gamereckt.com/wp-content/uploads/2015/09/dota-2-the-international-2016.jpg">
+				</img>
+			</div>
+
+			<p class="main-description">
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+				veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+				commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+				velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+				occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+				mollit anim id est laborum.
+			</p>
+
+			Team Tiles goes here:
+			<div class="container-fluid team-tiles">
+				<div class="row">
+					<span>[[team.id]]</span>
+					<img class="team-tile-img" src="http://placehold.it/75x75"></img>
+				</div>
+				<div class="row">
+					<span>[[team.id]]</span>
+					<img class="team-tile-img" src="http://placehold.it/75x75"></img>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer role="navigation" class="footer">
+		<p>&copy; 2015 Company, Inc.</p>
+		<p class="text-muted">This is a app level footer.</p>
+		<!-- TODO checkout http://materializecss.com/footer.html and other CSS pratices -->
+	</footer>
+</body>
+</html>

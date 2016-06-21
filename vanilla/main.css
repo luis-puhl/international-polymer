@@ -1,0 +1,41 @@
+paper-header-panel {
+	@apply(--shadow-elevation-2dp);
+}
+.green .paper-header {
+	background-color: var(--paper-green-500);
+}
+paper-toolbar.green {
+	background-color: var(--paper-green-500);
+}
+nav.navbar{
+	margin: 0;
+}
+.footer{
+	position: relative;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	margin-top: 40px;
+	font-size: 12px;
+	line-height: 1.5;
+	color: #767676;
+	border-top: 1px solid #eee;
+}
+
+.main-description{
+	text-align: center;
+}
+#adi-banner {
+	text-align: center;
+}
+.team-tiles{
+	text-align: center;
+}
+
+
+team-tile-img {
+	max-width: 100%;
+	max-height: 100%;
+	margin: 0 auto;
+	opacity: 0;
+	transition: 0.5s opacity;
+}
