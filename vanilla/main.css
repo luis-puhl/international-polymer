@@ -1,36 +1,62 @@
-paper-header-panel {
-	@apply(--shadow-elevation-2dp);
+html{
+	overflow-x:hidden;
 }
-.green .paper-header {
-	background-color: var(--paper-green-500);
-}
-paper-toolbar.green {
-	background-color: var(--paper-green-500);
-}
+
 nav.navbar{
 	margin: 0;
 }
 .footer{
 	position: relative;
-	padding-top: 40px;
+	padding-top: 20px;
 	padding-bottom: 40px;
 	margin-top: 40px;
 	font-size: 12px;
 	line-height: 1.5;
 	color: #767676;
-	border-top: 1px solid #eee;
+	border-top: 1px solid #080808;
+	text-align: center;
+	background-color: #f0f0f0;
 }
 
 .main-description{
 	text-align: center;
 }
-#adi-banner {
+#banner {
 	text-align: center;
+	padding: 0;
+	margin:0;
+	width: 100%;
 }
-.team-tiles{
-	text-align: center;
+@media all and (max-width: 350px) {
+	#banner {
+		width: 100%;
+	}
+}
+@media all and (max-width: 500px) {
+	.container-fluid{
+		width: 100%;
+		padding: 0;
+		margin: 0;
+	}
+	.container{
+		width: 100%;
+		padding: 0;
+		margin: 0;
+	}
 }
 
+.team-tiles{
+	text-align: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	flex-wrap: wrap;
+}
+.team-tile{
+	flex: 1 1 auto;
+	width: 100px;
+	transition: width 0.7s ease-out;
+}
 
 team-tile-img {
 	max-width: 100%;
@@ -39,3 +65,5 @@ team-tile-img {
 	opacity: 0;
 	transition: 0.5s opacity;
 }
+
+ 
