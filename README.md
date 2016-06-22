@@ -2,37 +2,26 @@
 
 News and detaild info for dota international lovers
 
-## Install the Polymer-CLI
+## Install
 
-First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your application locally.
-
-## Viewing Your Application
+Install **NodeJS** to get `npm` then follow.
 
 ```
-$ polymer serve
+$ npm install -g bower
+$ npm install -g lite-server
+$ bower install bootstrap -f --save
 ```
 
-## Building Your Application
+We had problems with de dependency tree, namely *bootstrap's* `bower.json`
+requires *JQuery* at `jquery#1.9.1 - 2` and bower can't find this version.
+
+## Running
 
 ```
-$ polymer build
+$ lite-server
 ```
 
-This will create a `build/` folder with `bundled/` and `unbundled/` sub-folders
-containing a bundled (Vulcanized) and unbundled builds, both run through HTML,
-CSS, and JS optimizers.
+## Tests
 
-You can serve the built versions by giving `polymer serve` a folder to serve
-from:
-
-```
-$ polymer serve build/bundled
-```
-
-## Running Tests
-
-```
-$ polymer test
-```
-
-Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
+The software requirements files are in the `test` folder, the final work should
+resemble the validation images.
