@@ -1,0 +1,14 @@
+
+.main-description{
+	background-image: url(/vanilla/img/home/home_degrade_cima.png);
+	background-size: 100%;
+	padding-top: 5rem;
+	padding-bottom: 3rem;
+	padding-left: 7rem;
+	padding-right: 7rem;
+	max-height: 253px;
+	/* height: 253px; */
+	font-size: 2rem;
+	background-color: transparent;
+	background-position: bottom;
+}
