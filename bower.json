@@ -3,18 +3,10 @@
   "version": "0.0.0",
   "description": "News and detaild info for dota international lovers",
   "main": "index.html",
-  "dependencies": {
-    "polymer": "Polymer/polymer#^1.4.0",
-    "bootstrap": "^3.3.6",
-    "iron-elements": "PolymerElements/iron-elements#^1.0.10",
-    "paper-elements": "PolymerElements/paper-elements#^1.0.7",
-    "paper-input": "PolymerElements/paper-input#^1.1.11",
-    "paper-header-panel": "PolymerElements/paper-header-panel#1.1.6"
+  "resolutions": {
+    "jquery": "^3.0.0"
   },
-  "devDependencies": {
-    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
-    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
-    "web-component-tester": "^4.0.0",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+  "dependencies": {
+    "bootstrap": "^3.3.6"
   }
 }
