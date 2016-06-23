@@ -1,15 +1,109 @@
-html{
-	overflow-x:hidden;
+/*******FONTES********/
+@font-face {
+    font-family: "Radiance";
+    src: url(fonts/radiance-webfont.woff);
+}
+
+/********RESETADOR********/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
 }
 
 body{
 	background-color: black;
 	color: white;
+	font-family: "Radiance";
 }
 
 nav.navbar{
 	margin: 0;
+	background: linear-gradient(#5b1716, #6f2019); /* Standard syntax */
+	font-size: 0.9em;
 }
+#separador {
+  height: 1px;
+  border: 0;
+  margin: 0 auto;
+  background-image: url("../img/home/home_separador_main.png");
+  width: 658px;
+  display: block;
+}
+
+.navbar-default{
+	border-color: #341a17;
+}
+
+.navbar-default .navbar-brand{
+	color : #d7d7d7;
+}
+
+.navbar-default .navbar-nav > li > a{
+	color : #d7d7d7;
+}
+.navbar-brand{
+	padding-left:  3em;
+	padding: 0.6em 1.5em 0.8em 4em;
+}
+.navbar-brand > img{
+	width: 1.6em;
+}
+.navbar-default .navbar-nav > hr {
+    border:0;
+		margin: 1em 0 0 0;
+		height: 19px;
+		width: 1px;
+		position: relative;
+		float: left;
+    background:url("../img/separador_menu.png");
+		display: inline-block;
+}
+
+.navbar-form .form-control{
+	color: #fff;
+	border: 1px solid #751519;
+	background-color: #44120d;
+}
+
 .search-button-alt-text{
 	display: none;
 }
@@ -58,4 +152,3 @@ nav.navbar{
 		margin: 0;
 	}
 }
-

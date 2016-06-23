@@ -1,14 +1,17 @@
 
 .main-description{
-	background-image: url(/vanilla/img/home/home_degrade_cima.png);
+	background-image: url("/img/home/home_degrade_cima.png");
+	font-family: "Radiance";
+	font-weight: lighter;
 	background-size: 100%;
-	padding-top: 5rem;
-	padding-bottom: 3rem;
-	padding-left: 7rem;
-	padding-right: 7rem;
+	padding-top: 2em;
+	border-top: 1px solid transparent;
+	border-image: url("img/home/home_separador_main.png");
+	padding-bottom: 1em;
 	max-height: 253px;
 	/* height: 253px; */
-	font-size: 2rem;
+	font-size: 1.2em;
+	color: #dfdfdf;
 	background-color: transparent;
 	background-position: bottom;
 }
