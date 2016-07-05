@@ -1,4 +1,4 @@
-
+<link rel="stylesheet" href="header-markdown-fixer.css" media="screen" title="no title" charset="utf-8">
 # Teams
 
 ROOT: `http://www.dotabuff.com/esports/teams`
