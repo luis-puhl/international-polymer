@@ -1,4 +1,76 @@
 
+# Teams
+
+ROOT: `http://www.dotabuff.com/esports/teams`
+
+## POPULAR TEAMS
+
+- Team
+	- Time since last match (Last Match 23 hours ago)
+- Popularity
+- Matches
+- Win %
+- KDA
+- GPM
+- XPM
+- Duration (last match duration)
+
+## MOST MATCHES (LAST 90 DAYS)
+
+- Team
+- Matches
+- Win %
+
+## HIGHEST WIN RATE (ALL TIME)
+
+- Team
+- Matches
+- Win %
+
+# Team
+
+ROOT: `http://www.dotabuff.com/esports/teams/<team_id>`
+
+
+# League
+
+ROOT: `http://www.dotabuff.com/esports/leagues/<league-id>`
+
+The International 2016 Premium League: http://www.dotabuff.com/esports/leagues/4664
+
+## EVENT SPLITS
+
+- Event Split
+- Dates
+- Regions
+- Matches
+- Length
+
+## TEAM STANDINGS
+
+- Team
+- Record
+- KDA
+- GPM
+- XPM
+
+## RECENT MATCHES
+
+- Won
+- Lost
+- Duration
+
+## SUCCESSFUL PLAYERS
+
+- Player
+- Record
+- KDA
+
+## POPULAR HEROES
+
+- Hero
+- Pick %
+- Win %
 
 # Players
 
