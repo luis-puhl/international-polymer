@@ -235,6 +235,103 @@ nav.navbar{
   font-weight: 500;
 }
 
+.sidebar-players > h2:first-child{
+  border-radius: 0.1em;
+  font-family: Radiance, Georgia;
+  background-image: url("../img/teams/fundo_nome_time.png");
+  font-size: 1.2em;
+  line-height: 1.4em;
+  padding: 0.13em 0.2em 0.05em 0.2em;
+  text-shadow: 2px 2px 5px #000;
+  color: #FFF;
+  font-weight: 500;
+}
+.sidebar-players > span{
+  width: 100%;
+}
+.sidebar-players > span > img{
+  max-width: 100%;
+  width: 100%;
+}
+.sidebar-players > span > h3{
+  text-align: center;
+  font-size: 1.4em;
+  font-weight: 600;
+}
+
+.container-players > h1:first-child{
+  border-radius: 0.1em;
+  font-family: Radiance, Georgia;
+  background-image: url("../img/teams/fundo_nome_time.png");
+  font-size: 2.6em;
+  padding: 0.13em 0.2em 0.05em 0.2em;
+  text-shadow: 2px 2px 5px #000;
+  color: #FFF;
+  font-weight: 500;
+}
+.main-profile > .sidebar-stats{
+  margin-top: 1em;
+}
+
+.sidebar-stats > .stats-player{
+  background: linear-gradient(#460f0f, #360e0e);
+  padding : 0 0.2em;
+}
+
+.sidebar-stats > .stats-player > #separador{
+  height: 1px;
+  border: 0;
+  width: auto;
+  background-image: url("../img/home/home_separador_main.png");
+  background-position: center;
+  display: block;
+}
+
+.sidebar-stats > .stats-player > .linha-player{
+  padding: 0.5em 0 0 0;
+  display: flex;
+  font-size: 1em;
+  text-shadow: 2px 2px 5px #000;
+}
+.sidebar-stats > .stats-player > .linha-player:last-child{
+  padding-bottom: 0.2em;
+}
+
+.sidebar-stats > .stats-player > .linha-player > p:first-child{
+  flex-grow: 0.7;
+}
+
+.sidebar-stats > .stats-player > .linha-player > p:nth-child(2){
+  flex-grow: 0.3;
+  text-align: right;
+}
+
+.texto-profile{
+  margin : 0.4em 0 2em 0;
+}
+
+.texto-profile > h1{
+  font-size: 2.4em;
+}
+.texto-profile > h2{
+  font-size: 1.4em;
+}
+
+.texto-profile > p{
+  color: #d7d7d7;
+  padding-top: 1em;
+  line-height: 1.1em;
+  text-align: justify;
+}
+.favored-hero > span{
+  display: flex;
+}
+.favored-hero > span > h3{
+  font-size: 1.8em;
+  font-weight: bold;
+  margin : auto 0 auto 0.2em;
+}
+
 .titulo-pagina{
   padding: 3em 0 1em 0;
   margin-top: -2em;
