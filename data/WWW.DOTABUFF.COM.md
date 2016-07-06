@@ -177,3 +177,94 @@ If page is too big, the list returns, but empty.
 	- X (wins, green) - Y (losses, red)
 
 Does URL query.
+
+
+# About Web Scraping
+
+When you do web mining in html or across many sites it's called
+[Web scraping](https://en.wikipedia.org/wiki/Web_scraping).
+
+For nodeJs what I've found is this nice explanation
+http://stackoverflow.com/questions/7977945/html-parser-on-node-js#answer-7978072
+
+The code would be like
+```
+/**
+ * JsDOM solution would use
+ * 	var jQuery = require('jquery');
+ * 	var jsdom = require('jsdom');
+**/
+
+/**
+ * cheerio is a lean jQuery, somewhat faster
+ * 	var cheerio = require('cheerio');
+**/
+```
+
+I've tried the YQL solution (Yahoo! Query Language), it's a web service that
+does *exacly* web scrapping across many sites at once. For YQL a example will
+be:
+
+```
+select * from html where
+url="http://finance.yahoo.com/q?s=yhoo" and
+xpath='//div[@id="yfi_headlines"]/div[2]/ul/li/a'
+```
+And for YQL on node we would have:
+```
+var YQL = require("yql");
+new YQL.exec('select * from data.html.cssselect where url="http://net.tutsplus.com/" and css=".post_title a"', function(response) {
+
+    //response consists of JSON that you can parse
+
+});
+```
+Examples Source: http://code.tutsplus.com/tutorials/web-scraping-with-node-js--net-25560
+
+At the time my code looks like this:
+
+```
+var YQL = require('yql');
+
+/**
+ * Go to http://www.dotabuff.com/esports/teams/<team-id>/matches?page=<page-number>
+ * find the following xPath
+ * /html/body/div[1]/div[7]/div[3]/section[2]/article/table
+ */
+function httpGetTeamsMatches(teamId, pageNumber) {
+	let url = `http://www.dotabuff.com/esports/teams/${teamId}/matches?page=${pageNumber}`;
+	let query =
+	`select *
+	from data.html.cssselect
+	where
+		url="${url}" and
+		css=".post_title a"
+	`
+
+	new YQL.exec(query, function(response) {
+	    //response consists of JSON that you can parse
+	});
+}
+```
+
+BUT, testing at the [YQL console](https://developer.yahoo.com/yql/console/) and
+found that  dotabuff will redirect to a robots.txt meaning it's forbidden for
+web scarpers.
+
+```
+QUERY : select * from html where url="http://www.dotabuff.com/esports/teams/1838315/matches?page=2"
+
+RESULT (partial) :
+<diagnostics>
+	   <publiclyCallable>true</publiclyCallable>
+	   <url execution-start-time="16" execution-stop-time="29"
+		   execution-time="13" id=""><![CDATA[http://www.dotabuff.com/robots.txt]]></url>
+	   <url
+		   error="Redirected to a robots.txt restricted URL: http://www.dotabuff.com/esports/teams/1838315/matches?page=2"
+		   execution-start-time="1" execution-stop-time="30"
+		   execution-time="29" http-status-code="403" http-status-message="Forbidden"><![CDATA[http://www.dotabuff.com/esports/teams/1838315/matches?page=2]]></url>
+	   <user-time>30</user-time>
+	   <service-time>42</service-time>
+	   <build-version>0.2.998</build-version>
+   </diagnostics>
+```

@@ -84,3 +84,13 @@ Dynamic. Three slash-separated numbers representing Kills, Deaths and Assists.
 # PLAYERS
 
 # HEROES
+
+
+# Web Scraping
+
+|Info | source |
+|-----|--------|
+| Quick view over WebAPI for valve | https://wiki.teamfortress.com/wiki/WebAPI#Dota_2 |
+| Real Dota2 API documentation | http://dota2api.readthedocs.io/en/latest/responses.html |
+| PHP code for processing DotA 2 API-requests | https://github.com/kronusme/dota2-api |
+| Discussion about the API | http://dev.dota2.com/showthread.php?t=47115 |
