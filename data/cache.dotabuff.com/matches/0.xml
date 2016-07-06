@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<match id="">
+	<timestamp>timestamp</timestamp>
+	<patch id="" />
+	<teams>
+		<team id="" />
+		<team id="" />
+	</teams>
+	<winner team-id="" />
+</match>

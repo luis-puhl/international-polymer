@@ -164,6 +164,12 @@ More link `http://www.dotabuff.com/esports/players/<player-id>/heroes`
 
 More Link `http://www.dotabuff.com/esports/players/<player-id>/matches`
 
+### Matches
+
+http://www.dotabuff.com/esports/teams/1838315/matches?page=200
+
+If page is too big, the list returns, but empty.
+
 ## Panel "RECENT LEAGUES"
 
 - League
