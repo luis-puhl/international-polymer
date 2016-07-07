@@ -1656,33 +1656,50 @@ qacct:"p-99TeGITExdEz-"
 </body>
 </html>
 `;
+
 class URI {
-    constructor(uri) {
-        this.uri = uri;
-    }
+	uri : string;
+	constructor(uri :string){
+		this.uri = uri;
+	}
 }
+
 class Match {
-    constructor(league, match, timestamp) {
-        this.league = league;
-        this.match = match;
-        this.timestamp = timestamp;
-    }
+	league : URI;
+	match : URI;
+	timestamp : Date;
+	constructor (league:URI, match:URI, timestamp:Date) {
+		this.league  = league;
+		this.match  = match;
+		this.timestamp  = timestamp;
+	}
 }
-let regex;
-let str;
-let matches = new Array();
-;
+
+let regex: RegExp;
+let str: string;
+let matches: Array<Match> = new Array<Match>();;
+
 str = teamSecretMatches;
+
 regex = /<table class="table table-striped recent-esports-matches">[\s\S]+<tbody>([\s\S]+)\<\/tbody\>/igm;
 str = regex.exec(str)[1];
+
 regex = /(?:<tr>([\s\S]+?(?=<\/tr>))<\/tr>)+/igm;
-let matchCursor;
+
+let matchCursor: RegExpExecArray;
 while ((matchCursor = regex.exec(str)) !== null) {
-    let lastMatch = matchCursor[1];
-    let leagueRegex = /<a href="(\/esports\/leagues\/[\d]+)"/i;
-    let matchRegex = /<a [^h]+href="(\/matches\/[\d]+)"/i;
-    let timestampRegex = /<time datetime="([^"]+)"/i;
-    matches.push(new Match(new URI(leagueRegex.exec(lastMatch)[1]), new URI(matchRegex.exec(lastMatch)[1]), new Date(timestampRegex.exec(lastMatch)[1])));
+	let lastMatch: string = matchCursor[1];
+
+	let leagueRegex:RegExp = /<a href="(\/esports\/leagues\/[\d]+)"/i;
+	let matchRegex:RegExp = /<a [^h]+href="(\/matches\/[\d]+)"/i;
+	let timestampRegex:RegExp = /<time datetime="([^"]+)"/i;
+	matches.push(new Match(
+		new URI(leagueRegex.exec(lastMatch)[1]),
+		new URI(matchRegex.exec(lastMatch)[1]),
+		new Date(timestampRegex.exec(lastMatch)[1])
+	));
+
 }
+
 console.log(matches.length);
 console.log(matches[0]);
