@@ -1,3 +1,5 @@
+const http = require('http');
+const debug = false;
 const teamSecretMatches = `
 <!DOCTYPE html><html class="esports-skin">
 <head>
@@ -1668,21 +1670,37 @@ class Match {
         this.timestamp = timestamp;
     }
 }
-let regex;
-let str;
-let matches = new Array();
-;
-str = teamSecretMatches;
-regex = /<table class="table table-striped recent-esports-matches">[\s\S]+<tbody>([\s\S]+)\<\/tbody\>/igm;
-str = regex.exec(str)[1];
-regex = /(?:<tr>([\s\S]+?(?=<\/tr>))<\/tr>)+/igm;
-let matchCursor;
-while ((matchCursor = regex.exec(str)) !== null) {
-    let lastMatch = matchCursor[1];
-    let leagueRegex = /<a href="(\/esports\/leagues\/[\d]+)"/i;
-    let matchRegex = /<a [^h]+href="(\/matches\/[\d]+)"/i;
-    let timestampRegex = /<time datetime="([^"]+)"/i;
-    matches.push(new Match(new URI(leagueRegex.exec(lastMatch)[1]), new URI(matchRegex.exec(lastMatch)[1]), new Date(timestampRegex.exec(lastMatch)[1])));
+function matchesPerTeamPage(teamMatchesHtmlString, matches) {
+    let regex;
+    let str = teamMatchesHtmlString;
+    if (matches == null) {
+        matches = new Array();
+    }
+    regex = /<table class="table table-striped recent-esports-matches">[\s\S]+<tbody>([\s\S]+)\<\/tbody\>/igm;
+    str = regex.exec(str)[1];
+    regex = /(?:<tr>([\s\S]+?(?=<\/tr>))<\/tr>)+/igm;
+    let matchCursor;
+    while ((matchCursor = regex.exec(str)) !== null) {
+        let lastMatch = matchCursor[1];
+        let leagueRegex = /<a href="(\/esports\/leagues\/[\d]+)"/i;
+        let matchRegex = /<a [^h]+href="(\/matches\/[\d]+)"/i;
+        let timestampRegex = /<time datetime="([^"]+)"/i;
+        matches.push(new Match(new URI(leagueRegex.exec(lastMatch)[1]), new URI(matchRegex.exec(lastMatch)[1]), new Date(timestampRegex.exec(lastMatch)[1])));
+    }
+    if (debug) {
+        console.log(matches.length);
+        console.log(matches[0]);
+    }
 }
-console.log(matches.length);
-console.log(matches[0]);
+function matchesPerTeam(teamId) {
+    let matches = new Array();
+    let page = 1;
+    http.get(`http://www.dotabuff.com/esports/teams/${teamId}/matches?page=${page}`, (res) => {
+        console.log(`Got response: ${res.statusCode}`);
+        console.log(res.body);
+        res.resume();
+    }).on('error', (e) => {
+        console.log(`Got error: ${e.message}`);
+    });
+}
+matchesPerTeam(1838315);
