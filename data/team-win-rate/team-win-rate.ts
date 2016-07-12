@@ -58,16 +58,13 @@ function buildCurlMatchesPerTeamCMD(teamId :number, page :number) :string {
 	let hasCahce :boolean = false;
 	try {
 		hasCahce = fs.statSync(cacheFile).isFile();
-	} catch (e) {
-		console.error(`fs.statSync error: ${e}`);
-	}
-	if (hasCahce == true) {
-		cmd = `cat ${cacheFile}`;
-		if (debug){
-			console.log(`skiping wget, using file cache ${cacheFile}`);
+		if (hasCahce == true) {
+			cmd = `cat ${cacheFile}`;
+			if (debug){
+				console.log(`skiping wget, using file cache ${cacheFile}`);
+			}
 		}
-	} else {
-
+	} catch (e) {
 		let curlPage :string = `curl "http://www.dotabuff.com/esports/teams/${teamId}/matches?page=${page}" `;
 		let curlBody =
 			'-H "Host: www.dotabuff.com" ' +
@@ -89,37 +86,63 @@ function buildCurlMatchesPerTeamCMD(teamId :number, page :number) :string {
 	return cmd;
 }
 
-function matchesPerTeam(teamId : number) {
-	let matches : Array<Match> = new Array<Match>();
-	let page : number = 1;
-
-	let cmd = buildCurlMatchesPerTeamCMD(teamId, page);
-	child_process.exec(cmd, (error, stdout, stderr) => {
-		if (error) {
-			console.error(`exec error: ${error}`);
-			return;
-		}
-		let result :string = stdout.toString();
-		matches = matches.concat(matchesPerTeamPage(result));
-
-		let pages = getNumberOfPages(result);
-		let pagesDone = 1;
-		for (page = 2; page <= pages; page++) {
-			cmd = buildCurlMatchesPerTeamCMD(teamId, page);
-			child_process.exec(cmd, (error, stdout, stderr) => {
-				if (error) {
+function executeCurlMatchesPerTeamCMD(teamId :number, page :number) :Promise<string> {
+	return new Promise<string>( (resolve, reject) => {
+		let cmd = buildCurlMatchesPerTeamCMD(teamId, page);
+		child_process.exec(cmd, (error, stdout, stderr) => {
+			if (error) {
+				if (debug){
 					console.error(`exec error: ${error}`);
-					return;
 				}
-				let result = stdout.toString();
-				matches = matches.concat(matchesPerTeamPage(result));
+				reject(error);
+			}
+			let result :string = stdout.toString();
+			resolve(result);
+		});
+	});
+}
 
-				pagesDone++;
-				if (pagesDone == pages){
-					rendevous(matches);
-				}
-			});
-		}
+function matchesPerTeam(teamId : number) :Promise<Array<Match>>{
+	return new Promise<Array<Match>>( (resolveMatchesPerTeam, rejectMatchesPerTeam) => {
+		let matches :Array<Match> = new Array<Match>();
+		let page :number = 1;
+		let pagesDone = 0;
+
+		let cmdExecutor :Promise<string>;
+		cmdExecutor = executeCurlMatchesPerTeamCMD(teamId, page);
+		cmdExecutor.then( (result) => {
+			// extracts data from the 1-st page
+			matches = matches.concat(matchesPerTeamPage(result));
+			pagesDone++;
+
+			// extracts data from the 2-nd page until the N-th page
+			let pages = getNumberOfPages(result);
+			for (page = 2; page <= pages; page++) {
+				let innerCmdExecutor :Promise<string>;
+				innerCmdExecutor = executeCurlMatchesPerTeamCMD(teamId, page);
+				innerCmdExecutor.then( (result) => {
+					// extracts data from the page K
+					matches = matches.concat(matchesPerTeamPage(result));
+					pagesDone++;
+					if (pagesDone == pages){
+						rendevous(matches);
+						resolveMatchesPerTeam(matches);
+					}
+				});
+				innerCmdExecutor.catch( (error) => {
+					if (debug){
+						console.error("Didn't resolve innerCmdExecutor");
+					}
+					rejectMatchesPerTeam(error);
+				});
+			}
+		});
+		cmdExecutor.catch( (error) => {
+			if (debug){
+				console.error("Didn't resolve cmdExecutor");
+			}
+			rejectMatchesPerTeam(error);
+		});
 	});
 }
 

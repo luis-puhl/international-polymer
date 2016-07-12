@@ -45,17 +45,14 @@ function buildCurlMatchesPerTeamCMD(teamId, page) {
     let hasCahce = false;
     try {
         hasCahce = fs.statSync(cacheFile).isFile();
-    }
-    catch (e) {
-        console.error(`fs.statSync error: ${e}`);
-    }
-    if (hasCahce == true) {
-        cmd = `cat ${cacheFile}`;
-        if (debug) {
-            console.log(`skiping wget, using file cache ${cacheFile}`);
+        if (hasCahce == true) {
+            cmd = `cat ${cacheFile}`;
+            if (debug) {
+                console.log(`skiping wget, using file cache ${cacheFile}`);
+            }
         }
     }
-    else {
+    catch (e) {
         let curlPage = `curl "http://www.dotabuff.com/esports/teams/${teamId}/matches?page=${page}" `;
         let curlBody = '-H "Host: www.dotabuff.com" ' +
             '-H "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0" ' +
@@ -74,34 +71,57 @@ function buildCurlMatchesPerTeamCMD(teamId, page) {
     }
     return cmd;
 }
-function matchesPerTeam(teamId) {
-    let matches = new Array();
-    let page = 1;
-    let cmd = buildCurlMatchesPerTeamCMD(teamId, page);
-    child_process.exec(cmd, (error, stdout, stderr) => {
-        if (error) {
-            console.error(`exec error: ${error}`);
-            return;
-        }
-        let result = stdout.toString();
-        matches = matches.concat(matchesPerTeamPage(result));
-        let pages = getNumberOfPages(result);
-        let pagesDone = 1;
-        for (page = 2; page <= pages; page++) {
-            cmd = buildCurlMatchesPerTeamCMD(teamId, page);
-            child_process.exec(cmd, (error, stdout, stderr) => {
-                if (error) {
+function executeCurlMatchesPerTeamCMD(teamId, page) {
+    return new Promise((resolve, reject) => {
+        let cmd = buildCurlMatchesPerTeamCMD(teamId, page);
+        child_process.exec(cmd, (error, stdout, stderr) => {
+            if (error) {
+                if (debug) {
                     console.error(`exec error: ${error}`);
-                    return;
                 }
-                let result = stdout.toString();
-                matches = matches.concat(matchesPerTeamPage(result));
-                pagesDone++;
-                if (pagesDone == pages) {
-                    rendevous(matches);
-                }
-            });
-        }
+                reject(error);
+            }
+            let result = stdout.toString();
+            resolve(result);
+        });
+    });
+}
+function matchesPerTeam(teamId) {
+    return new Promise((resolveMatchesPerTeam, rejectMatchesPerTeam) => {
+        let matches = new Array();
+        let page = 1;
+        let pagesDone = 0;
+        let cmdExecutor;
+        cmdExecutor = executeCurlMatchesPerTeamCMD(teamId, page);
+        cmdExecutor.then((result) => {
+            matches = matches.concat(matchesPerTeamPage(result));
+            pagesDone++;
+            let pages = getNumberOfPages(result);
+            for (page = 2; page <= pages; page++) {
+                let innerCmdExecutor;
+                innerCmdExecutor = executeCurlMatchesPerTeamCMD(teamId, page);
+                innerCmdExecutor.then((result) => {
+                    matches = matches.concat(matchesPerTeamPage(result));
+                    pagesDone++;
+                    if (pagesDone == pages) {
+                        rendevous(matches);
+                        resolveMatchesPerTeam(matches);
+                    }
+                });
+                innerCmdExecutor.catch((error) => {
+                    if (debug) {
+                        console.error("Didn't resolve innerCmdExecutor");
+                    }
+                    rejectMatchesPerTeam(error);
+                });
+            }
+        });
+        cmdExecutor.catch((error) => {
+            if (debug) {
+                console.error("Didn't resolve cmdExecutor");
+            }
+            rejectMatchesPerTeam(error);
+        });
     });
 }
 function rendevous(matches) {
