@@ -7,39 +7,61 @@ if (require == null){
 const http = require('http');
 const child_process = require('child_process');
 const fs = require("fs");
-// const $ = require('jQuery');
+const xml2js = require('xml2js');
 const cheerio = require('cheerio');
 
 const debug = true;
 
-class URI {
-	uri : string;
-	constructor(uri :string){
-		this.uri = uri;
-	}
+interface URI {
+	uri :string;
+	url :string;
 }
 
-class Match {
+interface Team {
+	teamId :number;
+	uri :URI;
+}
+
+interface Match {
 	league : URI;
 	match : URI;
 	timestamp : Date;
-	constructor (league:URI, match:URI, timestamp:Date) {
+	teams :Team[];
+}
+
+class RealMatch implements Match{
+	league : URI;
+	match : URI;
+	timestamp : Date;
+	teams :Team[];
+	constructor (league:URI, match:URI, timestamp:Date, teams :Team[]) {
 		this.league  = league;
 		this.match  = match;
 		this.timestamp  = timestamp;
+		if (teams.length > 2){
+			throw new Error("Too many teams in a match");
+		}
+		this.teams = teams;
 	}
 }
 
-function matchesPerTeamPage(teamMatchesHtmlString : string) :Array<Match> {
+function matchesPerTeamPage(teamMatchesHtmlString : string) :Match[] {
 	let matches = new Array<Match>();
 	let $ = cheerio.load(teamMatchesHtmlString);
 
+	/*
+	body > div.container-outer > div.container-inner > div.content-inner > section:nth-child(2) > article > table > tbody > tr
+	*/
 	let $matchTRs = $('table.table.table-striped.recent-esports-matches tbody tr');
-	$matchTRs.each( (index, element) => {
-		let league = $(element).find("a[href*='esports/leagues']").attr("href");
-		let match = $(element).find("a[href*='matches']").attr("href");
-		let timestamp = $(element).find("time").attr("datetime");
-		matches.push(new Match(league, match, timestamp));
+	$matchTRs.each( (index, matchTR) => {
+		let league = $(matchTR).find("a[href*='esports/leagues']").attr("href");
+		let match = $(matchTR).find("a[href*='matches']");
+		let matchURI = match.attr("href");
+		let teamAresult = match.attr("class"); // class 'lost' and 'won'
+		let teamB =  $(matchTR).find("td:nth-child(5) > a.esports-link").attr("href");
+		let timestamp = $(matchTR).find("time").attr("datetime");
+		let teamA = // put team original team id here
+		matches.push(new RealMatch(league, match, timestamp));
 	});
 	return matches;
 }
@@ -65,19 +87,7 @@ function buildCurlMatchesPerTeamCMD(teamId :number, page :number) :string {
 			}
 		}
 	} catch (e) {
-		let curlPage :string = `curl "http://www.dotabuff.com/esports/teams/${teamId}/matches?page=${page}" `;
-		let curlBody =
-			'-H "Host: www.dotabuff.com" ' +
-			'-H "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0" ' +
-			'-H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" ' +
-			'-H "Accept-Language: en-US,en;q=0.5" ' +
-			'--compressed ' +
-			'-H "Cookie: _tz=America"%"2FSao_Paulo; _ga=GA1.2.1101389915.1468258865; _gat=1; __qca=P0-1237342249-1468258865314" ' +
-			'-H "Connection: keep-alive" ' +
-			'-H "Upgrade-Insecure-Requests: 1" ' +
-			'-H "Cache-Control: max-age=0"';
-		let cache :string = ` > ${cacheFile} && cat ${cacheFile}`;
-		cmd = curlPage + curlBody + cache;
+		cmd = `./get-team-match-list.sh ${teamId} ${page} ${cacheFile}`;
 		if (debug){
 			console.log(`using wget, watch network usage for ${curlPage}`);
 		}
@@ -153,5 +163,7 @@ function rendevous(matches :Array<Match>) {
 	}
 }
 
+let matches1838315 = matchesPerTeam(1838315);
 
-matchesPerTeam(1838315);
+let builder = new xml2js.Builder();
+let xml = builder.buildObject(obj);
