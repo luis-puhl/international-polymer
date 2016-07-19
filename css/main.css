@@ -2,11 +2,11 @@
 @font-face {
     font-family: "Radiance";
     src: url(fonts/radiance-webfont.woff);
-}
-@font-face {
     font-family:"Radiance";
     src: url(fonts/radiance-semibold-webfont.woff);
-    font-weight: bold;
+    font-weight: 600;
+    src: url(fonts/radiance-bold-webfont.woff);
+    font-weight: 800;
 }
 @@font-face {
   font-family: "Trajan Pro";
@@ -154,6 +154,12 @@ nav.navbar{
 .sidebar_times > .team-tile > img{
   width: 90%;
 }
+.sidebar-stats{
+  margin : 1em 0 0 0;
+}
+* > .sidebar-stats:first-child{
+  margin: 0;
+}
 /****************************TIMES************************************/
 
 .container-time{
@@ -206,11 +212,142 @@ nav.navbar{
 .container-sidebar{
   margin-top: 1em;
 }
-.winrate{
-  min-height: 6em;
-  background-image: url("../img/teams/bg_winrate.png");
-  background-repeat: no-repeat;
 
+/******************HEROES*********************/
+
+.container-hero > h1:first-child{
+  border-radius: 0.1em;
+  font-family: Radiance, Georgia;
+  background-image: url("../img/teams/fundo_nome_time.png");
+  font-size: 2.6em;
+  padding: 0.13em 0.2em 0.05em 0.2em;
+  text-shadow: 2px 2px 5px #000;
+  color: #d7d7d7;
+  font-weight: 500;
+}
+
+.hero-principal > .lore-hero {
+  margin: 1em 0 1em 0;
+  color: #d7d7d7;
+  text-align: justify;
+  text-justify :inter-word;
+  font-size: 0.9em;
+  background-color: #191a1a;
+  padding: 0.3em 0.5em;
+  line-height: 1.1em;
+  border: #564c4c solid 1px;
+
+}
+.hero-principal > h3{
+  font-size: 1.6em;
+  color: #d7d7d7;
+}
+
+.hero-principal > img:first-child{
+  display: block;
+  margin : 1.2em 0 1.2em 0;
+}
+
+.hero-attributes{
+  margin: 1.2em 0 2em 0;
+  line-height: 1.2em;
+}
+.hero-attributes > h2{
+  font-size: 2em;
+  font-weight: 600;
+  color: #d7d7d7;
+  line-height: 1em;
+  margin-bottom: 0.4em;
+}
+.hero-attributes > h6{
+  font-size: 1em;
+  font-weight: 800;
+  color: #f56363;
+  display: inline;
+  letter-spacing: 0.05em;
+}
+.hero-attributes > p {
+  display: inline;
+  letter-spacing: 0.05em;
+}
+.container-abilities{
+  margin: 0.5em 0 0 0;
+  display: flex;
+  flex-direction: column;
+}
+.ability{
+  margin: 0.5em 0 0 0;
+  display: flex;
+  background: linear-gradient(#161616, #181818);
+  padding: 2px;
+}
+.ability > img{
+  height: 100%;
+  flex-grow: 0.3;
+}
+.ability > span{
+  vertical-align: top;
+  margin-left: 0.3em;
+  padding-bottom: 0.5em;
+  color: #d7d7d7;
+}
+.ability > span > h3{
+  font-size: 0.9em;
+  font-weight: 600;
+  margin-bottom: -0.1em;
+}
+
+.ability > span > p{
+  font-size: 0.8em;
+  line-height: 1em;
+}
+.ability > .ability-parameters:first-child{
+  margin-top: 0.4em
+}
+.ability-parameters{
+  display: block;
+  line-height: 0.9em;
+}
+.ability-parameters > p{
+  display: inline;
+  font-size: 0.8em;
+  font-weight: 600;
+}
+.ability-parameters > p:first-child{
+  color: #f56363;
+
+}
+
+.ability-parameters > p:nth-child(2){
+  color: #d7d7d7;
+}
+
+.hero-attributes > .sidebar-stats{
+  margin-top: 2em;
+}
+.best-players-heroes{
+  display: flex;
+}
+.best-players-heroes > a{
+  flex-grow: 0.334;
+}
+.best-players-heroes > a > img{
+  width: 100%;
+}
+
+.winrate{
+  background: linear-gradient(#1a100e, #0a0808);
+  padding: 1em 0;
+
+}
+.winrate > span > p{
+  padding: 0.5em 1em 0em 0;
+  margin:0 0.5em 0 0;
+  vertical-align: bottom;
+  background: linear-gradient(#42cc5b, #20ab57);
+  font-weight: 800;
+  font-size: 1.8em;
+  text-shadow: 2px 2px 5px #000;
 }
 .sidebar-stats > h2:first-child {
   border-radius: 0.1em;
@@ -224,6 +361,39 @@ nav.navbar{
   font-weight: 100;
 }
 
+.sidebar-stats > .stats-heroes{
+  background: linear-gradient(#1a100e, #0a0808);
+  padding : 0 0.2em 0.4em 0.2em;
+}
+
+.sidebar-stats > .stats-heroes > #separador{
+  height: 1px;
+  border: 0;
+  width: auto;
+  background-image: url("../img/home/home_separador_main.png");
+  background-position: center;
+  display: block;
+}
+
+.sidebar-stats > .stats-heroes > .linha-hero{
+  padding: 0.5em 0 0 0;
+  display: flex;
+  font-size: 1em;
+  color: #d7d7d7;
+  text-shadow: 2px 2px 5px #000;
+}
+.sidebar-stats > .stats-heroes > .linha-hero:last-child{
+  padding-bottom: 0.2em;
+}
+
+.sidebar-stats > .stats-heroes > .linha-hero > p:first-child{
+  flex-grow: 0.7;
+}
+.sidebar-stats > .stats-heroes > .linha-hero > p:nth-child(2){
+  flex-grow: 0.3;
+  text-align: right;
+}
+
 .container-time > h1:first-child{
   border-radius: 0.1em;
   font-family: Radiance, Georgia;
@@ -234,6 +404,68 @@ nav.navbar{
   color: #FFF;
   font-weight: 500;
 }
+
+.sidebar-stats > .stats-heroes-pickrate, .sidebar-stats > .stats-heroes-banrate{
+  background: linear-gradient(#1a100e, #0a0808);
+  padding : 0 0.2em 0.4em 0.2em;
+}
+
+.stats-heroes-pickrate, .stats-heroes-banrate{
+  display: flex;
+  font-weight: 800;
+}
+.stats-heroes-pickrate{
+  background-image: linear-gradient(-90deg,rgba(255, 100, 100, 0.2), rgba(14, 58, 183, 0.5)), url("../img/heroes/bane_pick.png");
+  background-repeat: no-repeat;
+  background-position: left;
+}
+
+.stats-heroes-banrate{
+  background-image: linear-gradient(-90deg,rgba(255, 100, 100, 0.5), rgba(14, 58, 183, 0.2)), url("../img/heroes/bane_pick.png");
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+.stats-heroes-pickrate > p:first-child, .stats-heroes-banrate > p:first-child{
+  text-align: left;
+  vertical-align: bottom;
+  font-size: 1.6em;
+  flex-grow: 0.5;
+  color: #000;
+  margin-left: 0.2em;
+  text-shadow: #a1a1a1 0px 0px 2px;
+  align-items: flex-end;
+}
+.stats-heroes-banrate > p:first-child{
+  color: #d7d7d7;
+  text-shadow: none;
+}
+
+.stats-heroes-pickrate > p:last-child, .stats-heroes-banrate > p:last-child{
+  text-align: right;
+  font-size: 1.6em;
+  flex-grow: 0.5;
+  margin-right: 0.2em;
+  color: #d7d7d7;
+  text-shadow: none;
+}
+
+.stats-heroes-banrate > p:last-child{
+  color: #000;
+  text-shadow: #a1a1a1 0px 0px 2px;
+  vertical-align: bottom;
+}
+
+.sidebar-stats #separador{
+  height: 1px;
+  border: 0;
+  width: auto;
+  background-image: url("../img/home/home_separador_main.png");
+  background-position: center;
+  display: block;
+}
+
+/******************PLAYERS********************/
 
 .sidebar-players > h2:first-child{
   border-radius: 0.1em;
@@ -272,6 +504,10 @@ nav.navbar{
 .main-profile > .sidebar-stats{
   margin-top: 1em;
 }
+.main-profile > img:first-child{
+  max-width: 100%;
+  width : 100%;
+}
 
 .sidebar-stats > .stats-player{
   background: linear-gradient(#460f0f, #360e0e);
@@ -290,6 +526,7 @@ nav.navbar{
 .sidebar-stats > .stats-player > .linha-player{
   padding: 0.5em 0 0 0;
   display: flex;
+  color: #d7d7d7;
   font-size: 1em;
   text-shadow: 2px 2px 5px #000;
 }
@@ -361,4 +598,79 @@ nav.navbar{
 		padding: 0;
 		margin: 0;
 	}
+}
+
+/**************TESTES***********/
+progress{
+  /*-webkit-transform : rotate(-90deg);*/
+}
+progress[value] {
+
+  appearance : none;
+  -webkit-appearance : none;
+
+  width: 10em;
+  height: 1.4em;
+}
+progress[value]::-webkit-progress-bar{
+  background-color: #eee;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0,0,0,25) inset;
+}
+progress[value]::-webkit-progress-value {
+  background-image:
+
+	   -webkit-linear-gradient(top,
+	                           rgba(255, 255, 255, .25),
+	                           rgba(0, 0, 0, .25)),
+	   -webkit-linear-gradient(left, #09c, #f44);
+
+    border-radius: 2px;
+    background-size: 4em 2em, 100% 100%, 100% 100%;
+}
+progress[value].xpm-progress::-webkit-progress-value {
+  background-image:
+	   -webkit-linear-gradient(top,
+	                           rgba(255, 255, 255, .25),
+	                           rgba(0, 0, 0, .25)),
+	   -webkit-linear-gradient(left, #499bea,#207ce5);
+
+    border-radius: 2px;
+    background-size: 4em 2em, 100% 100%, 100% 100%;
+}
+progress[value].gpm-progress::-webkit-progress-value {
+  background-image:
+	   -webkit-linear-gradient(top,
+	                           rgba(255, 255, 255, .25),
+	                           rgba(0, 0, 0, .25)),
+	   -webkit-linear-gradient(left, #feb645,#f1e767);
+
+    border-radius: 2px;
+    background-size: 4em 2em, 100% 100%, 100% 100%;
+}
+progress[value].winrate-progress::-webkit-progress-value {
+  background-image:
+	   -webkit-linear-gradient(top,
+	                           rgba(255, 255, 255, .25),
+	                           rgba(0, 0, 0, .25)),
+	   -webkit-linear-gradient(left, #3aa13a,#6dde59);
+
+    border-radius: 2px;
+    background-size: 4em 2em, 100% 100%, 100% 100%;
+}
+
+.player-hero-stats{
+  display: flex;
+  flex-flow: column;
+  flex-grow: 0.5;
+}
+.player-hero-stats h2{
+  font-size: 1.4em;
+  font-weight: 600;
+}
+.player-hero-stats p{
+  margin: 0.2em 0;
+}
+.container-hero-stats{
+  display: flex;
 }

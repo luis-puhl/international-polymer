@@ -1,98 +1,160 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-	<title>Heroes - about-dota-international-polymer</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="manifest" href="/manifest.json">
+    <title>about-dota-international-polymer</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="/manifest.json">
 
-	<link rel="stylesheet" href="main.css" media="screen" title="no title" charset="utf-8">
-	<link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" media="screen" title="no title" charset="utf-8">
-
-	<script src="/bower_components/jquery/dist/jquery.min.js"></script>
-	<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" media="screen" title="no title" charset="utf-8">
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/main.css" media="screen" title="no title" charset="utf-8">
 </head>
+
 <body class="fullbleed layout vertical">
 
-	<nav role="navigation" class="navbar navbar-default navbar-static-top">
-		<div class="container-fluid">
+    <nav role="navigation" class="navbar navbar-default navbar-static-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar-collapse" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><img src="img/Dota_2_Logo.png"></a>
+            </div>
 
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="#bs-navbar-collapse"
-				aria-expanded="false">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Brand</a>
-			</div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/teams">TEAMS</a>
+                    </li>
+                    <hr>
+                    <li>
+                        <a href="/players">PLAYERS</a>
+                    </li>
+                    <hr>
+                    <li>
+                        <a href="/heroes">HEROES</a>
+                    </li>
+                </ul>
+                <form class="navbar-form navbar-right" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control search-box" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default search-button">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        <span class="search-button-alt-text">search</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <!-- container-fluid -->
+    </nav>
 
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse" id="bs-navbar-collapse">
-				<ul class="nav navbar-nav">
-					<li>
-						<a href="/teams">TEAMS</a>
-					</li>
-					<li>
-						<a href="/players">PLAYERS</a>
-					</li>
-					<li>
-						<a href="/heroes">HEROES</a>
-					</li>
-				</ul>
-				<form class="navbar-form navbar-right" role="search">
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Search">
-					</div>
-					<button type="submit" class="btn btn-default">Submit</button>
-				</form>
-			</div>
-		</div>
-	</nav>
-
-
-	<div class="container">
-		<div class="container-fluid">
-			<div id="adi-banner row">
-				<!-- TODO change for iron-image -->
-				<img id="banner" class="adi-banner col-md-12"
-					alt="home-banner"
-					src="http://placehold.it/350x150"
-					src2="http://www.gamereckt.com/wp-content/uploads/2015/09/dota-2-the-international-2016.jpg">
-				</img>
-			</div>
-
-			<p class="main-description">
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-				veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-				commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-				velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-				occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-				mollit anim id est laborum.
-			</p>
-
-			Team Tiles goes here:
-			<div class="container-fluid team-tiles">
-				<div class="row">
-					<span>[[team.id]]</span>
-					<img class="team-tile-img" src="http://placehold.it/75x75"></img>
+    <div class="container">
+      <div class="col-md-12 titulo-pagina">
+        <h1>Heroes</h1 >
+      </div>
+      <!-- col -->
+      <div class="col-md-9 container-hero">
+        <h1>Bane</h1>
+      </div>
+      <div class="col-md-4 hero-principal">
+        <img src="img/heroes/portrait_bane.png" />
+				<h3>Lore</h3>
+				<div class="lore-hero">
+        	<p class="descricao-heroi">When the gods have nightmares, it is Bane Elemental who brings them. Also known as Atropos, Bane was born from the midnight terrors of the goddess Nyctasha. A force of terror too powerful to be contained by sleep, he surfaced from her slumbers, fed upon her immortality, and stole his vaporous form from her inky blood. He is the essence of fear. Mortals who hear his voice hear their darkest secrets whispered in their ear. He calls to the hidden fear in every Hero's heart. Wakefulness is no protection, for Bane's black blood, continuously dripping, is a tar that traps his enemies in nightmare. In the presence of Bane, every Hero remembers to fear the dark.</p>
 				</div>
-				<div class="row">
-					<span>[[team.id]]</span>
-					<img class="team-tile-img" src="http://placehold.it/75x75"></img>
+      </div>
+      <div class="col-md-5 hero-attributes">
+        <h2>Atropos</h2>
+				<h6>Roles: </h6><p>disabler, ganker, initiator, support</p>
+				<br>
+				<h6>Attack Type: </h6><p>Ranged</p>
+				<br>
+				<h6>Attributte: </h6><p>Intelligence</p>
+				<div class="container-abilities">
+					<span class="ability">
+						<img src="img/heroes/ability_bane_1.png" />
+						<span>
+							<h3>Enfeeble</h3>
+							<p>Weakens an enemy unit, reducing its physical damage. Lasts 20 secondsWeakens an enemy unit, reducing its physical damage.</p>
+						</span>
+					</span>
+					<span class="ability">
+						<img src="img/heroes/ability_bane_1.png" />
+						<span>
+							<h3>Enfeeble</h3>
+							<p>Weakens an enemy unit, reducing its physical damage. Lasts 20 secondsWeakens an enemy unit, reducing its physical damage.</p>
+						</span>
+					</span>
+					<span class="ability">
+						<img src="img/heroes/ability_bane_1.png" />
+						<span>
+							<h3>Nightmare</h3>
+							<p>Puts the target enemy or friendly Hero to sleep and deals damage per second. Sleeping units are awakened when attacked, but the Nightmare passes to the attacking unit.</p>
+						</span>
+					</span>
+					<span class="ability">
+						<img src="img/heroes/ability_bane_1.png" />
+						<span>
+							<h3>Fiend’s Grip</h3>
+							<p>Grips an enemy unit, disabling it and causing heavy damage over time, while stealing mana every second based on the unit's maximum mana.</p>
+							<span class="ability-parameters"><p>Range: </p><p>1000</p></span>
+							<span class="ability-parameters"><p>Duration: </p><p>7 seconds</p></span>
+							<span class="ability-parameters"><p>Mana cost: </p><p>95 mana</p></span>
+							<span class="ability-parameters"><p>Duration: </p><p>14 / 12 / 10 / 8 seconds</p></span>
+						</span>
+					</span>
 				</div>
-			</div>
-		</div>
-	</div>
-
-	<footer role="navigation" class="footer">
-		<p>&copy; 2015 Company, Inc.</p>
-		<p class="text-muted">This is a app level footer.</p>
-		<!-- TODO checkout http://materializecss.com/footer.html and other CSS pratices -->
-	</footer>
+        <div class="sidebar-stats">
+          <h2>Best players with Bane</h2>
+          <div class="best-players-heroes">
+            <a href="#"><img src="img/players/player-1.png" /></a>
+            <a href="#"><img src="img/players/player-1.png" /></a>
+            <a href="#"><img src="img/players/player-1.png" /></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 container-sidebar">
+        <div class="sidebar-stats">
+          <h2>Winrate</h2>
+          <div class="winrate">
+            <span>
+              <p>57%</p>
+            </span>
+          </div>
+        </div>
+        <div class="sidebar-stats">
+          <h2>Stats</h2>
+          <div class="stats-heroes">
+            <span class="linha-hero"><p>Avg. KDA:</p><p>27/09/92</p></span>
+            <hr id="separador">
+            <span class="linha-hero"><p>Avg. GPM:</p><p>672<img src="img/icon_gold.png"></p></span>
+          </div>
+        </div>
+        <div class="sidebar-stats">
+          <h2>Pick & Ban</h2>
+          <div>
+            <span class="stats-heroes-pickrate"><p><br/>Picked</p><p>52 <br />Times</p></span>
+            <hr id="separador">
+            <span class="stats-heroes-banrate"><p>22<br/>Times</p><p><br />Banned</p></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- row -->
+  </div>
+  <footer role="navigation" class="footer">
+      <p>&copy; 2015 Company, Inc.</p>
+      <p class="text-muted">This is a app level footer.</p>
+  </footer>
 </body>
+
 </html>
