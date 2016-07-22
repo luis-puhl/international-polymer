@@ -13,39 +13,63 @@ const cheerio = require('cheerio');
 const debug = true;
 
 interface URI {
+	id :string;
 	uri :string;
 	url :string;
 }
 
-interface Team {
-	teamId :number;
-	uri :URI;
-}
-
-interface Match {
-	league : URI;
-	match : URI;
-	timestamp : Date;
-	teams :Team[];
-}
-
-class RealMatch implements Match{
-	league : URI;
-	match : URI;
-	timestamp : Date;
-	teams :Team[];
-	constructor (league:URI, match:URI, timestamp:Date, teams :Team[]) {
-		this.league  = league;
-		this.match  = match;
-		this.timestamp  = timestamp;
-		if (teams.length > 2){
-			throw new Error("Too many teams in a match");
+class RealURI implements URI {
+	id :string;
+	uri :string;
+	url :string;
+	constructor (source :string){
+		let sourceSplit :string[] = source.split('/');
+		if (sourceSplit.length > 1){
+			this.id = sourceSplit[sourceSplit.length-1];
+			delete sourceSplit[sourceSplit.length-1];
+			this.url = sourceSplit.join("/");
 		}
-		this.teams = teams;
+		this.uri = source;
+	}
+	toJSON() :Object {
+		return {"id": this.id, "uri": this.uri, "url": this.url};
 	}
 }
 
-function matchesPerTeamPage(teamMatchesHtmlString : string) :Match[] {
+interface Match {
+	league :URI;
+	match :URI;
+	timestamp :Date;
+	teamIds :number[];
+}
+
+class RealMatch implements Match{
+	league :URI;
+	match :URI;
+	timestamp :Date;
+	teamIds :number[];
+	constructor (league :URI, match :URI, timestamp :Date, teamIds :number[]) {
+		this.league  = league;
+		this.match  = match;
+		this.timestamp  = timestamp;
+		if (teamIds.length > 2){
+			throw new Error("Too many teams in a match");
+		}
+		this.teamIds = [];
+		this.teamIds = this.teamIds.concat(teamIds);
+	};
+
+	toJSON() :Object {
+		return {
+			"league": this.league.id,
+			"match": this.match.id,
+			"timestamp": this.timestamp,
+			"teamIds": this.teamIds
+		};
+	}
+}
+
+function matchesPerTeamPage(teamMatchesHtmlString :string, teamId :number) :Match[] {
 	let matches = new Array<Match>();
 	let $ = cheerio.load(teamMatchesHtmlString);
 
@@ -54,14 +78,15 @@ function matchesPerTeamPage(teamMatchesHtmlString : string) :Match[] {
 	*/
 	let $matchTRs = $('table.table.table-striped.recent-esports-matches tbody tr');
 	$matchTRs.each( (index, matchTR) => {
-		let league = $(matchTR).find("a[href*='esports/leagues']").attr("href");
+		let url = `http://www.dotabuff.com/esports/teams/${teamId}/matches/`;
+		let league :URI = new RealURI($(matchTR).find("a[href*='esports/leagues']").attr("href"));
 		let match = $(matchTR).find("a[href*='matches']");
-		let matchURI = match.attr("href");
+		let matchURI :URI = new RealURI(match.attr("href"));
 		let teamAresult = match.attr("class"); // class 'lost' and 'won'
 		let teamB =  $(matchTR).find("td:nth-child(5) > a.esports-link").attr("href");
 		let timestamp = $(matchTR).find("time").attr("datetime");
-		let teamA = // put team original team id here
-		matches.push(new RealMatch(league, match, timestamp));
+		let teamA = teamId;
+		matches.push(new RealMatch(league, match, timestamp, [teamA, teamB]));
 	});
 	return matches;
 }
@@ -89,7 +114,7 @@ function buildCurlMatchesPerTeamCMD(teamId :number, page :number) :string {
 	} catch (e) {
 		cmd = `./get-team-match-list.sh ${teamId} ${page} ${cacheFile}`;
 		if (debug){
-			console.log(`using wget, watch network usage for ${curlPage}`);
+			console.log(`using wget, watch network usage for ${cacheFile}`);
 		}
 	}
 
@@ -122,7 +147,7 @@ function matchesPerTeam(teamId : number) :Promise<Array<Match>>{
 		cmdExecutor = executeCurlMatchesPerTeamCMD(teamId, page);
 		cmdExecutor.then( (result) => {
 			// extracts data from the 1-st page
-			matches = matches.concat(matchesPerTeamPage(result));
+			matches = matches.concat(matchesPerTeamPage(result, teamId));
 			pagesDone++;
 
 			// extracts data from the 2-nd page until the N-th page
@@ -132,7 +157,7 @@ function matchesPerTeam(teamId : number) :Promise<Array<Match>>{
 				innerCmdExecutor = executeCurlMatchesPerTeamCMD(teamId, page);
 				innerCmdExecutor.then( (result) => {
 					// extracts data from the page K
-					matches = matches.concat(matchesPerTeamPage(result));
+					matches = matches.concat(matchesPerTeamPage(result, teamId));
 					pagesDone++;
 					if (pagesDone == pages){
 						rendevous(matches);
@@ -157,13 +182,12 @@ function matchesPerTeam(teamId : number) :Promise<Array<Match>>{
 }
 
 function rendevous(matches :Array<Match>) {
+	console.log("rendevous");
 	if (debug){
-		console.log(`got ${matches.length +1} matches. They look as foolows`);
-		console.log(matches[0]);
+		let matchString :string = JSON.stringify(matches[0], null, '\t');
+		console.log(`got ${matches.length +1} matches. They look as foolows\n${matchString}`);
 	}
+	console.log("rendevous");
 }
 
 let matches1838315 = matchesPerTeam(1838315);
-
-let builder = new xml2js.Builder();
-let xml = builder.buildObject(obj);
